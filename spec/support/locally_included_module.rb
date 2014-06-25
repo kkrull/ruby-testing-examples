@@ -1,5 +1,5 @@
 module LocallyIncludedModule
-  def help_from_module_instance_method
+  def help_from_locally_included_instance_method
     :available
   end
 end

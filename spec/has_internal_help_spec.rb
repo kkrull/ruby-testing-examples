@@ -14,8 +14,8 @@ describe HasInternalHelp do
 
   describe 'modules included in other spec files' do
     it 'specs can not reach their methods' do
-      expect { help_from_module_instance_method }.to raise_error(NameError,
-          start_with("undefined local variable or method `help_from_module_instance_method'"))
+      expect { help_from_locally_included_instance_method }.to raise_error(NameError,
+          start_with("undefined local variable or method `help_from_locally_included_instance_method'"))
     end
   end
 
