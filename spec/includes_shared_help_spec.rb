@@ -1,5 +1,4 @@
 require 'includes_shared_help'
-require 'support/locally_included_module'
 
 describe IncludesSharedHelp do
   describe 'modules included in spec_helper' do
