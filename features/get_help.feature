@@ -6,3 +6,7 @@ Feature: Get help
   Scenario: Get help from Cucumber-specific helper modules
     When I use a cucumber helper module
     Then help should be available
+  
+  Scenario: Get help from helper module shared with RSpec
+    When I use a rspec helper module
+    Then help should be available
