@@ -1,3 +1,3 @@
-Cucumber::LoadPath.add_dirs('spec/support')
-require 'shared_module'
+Cucumber::LoadPath.add_dirs('test')
+require 'support/shared_module'
 World(SharedModule)
