@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+    <meta charset='utf-8'>
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <meta name="description" content="Ruby-testing-examples : Examples of how to use RSpec and Cucumber for testing ruby">
+
+    <link rel="stylesheet" type="text/css" media="screen" href="stylesheets/stylesheet.css">
+
+    <title>Ruby-testing-examples</title>
+  </head>
+
+  <body>
+
+    <!-- HEADER -->
+    <div id="header_wrap" class="outer">
+        <header class="inner">
+          <a id="forkme_banner" href="https://github.com/kkrull/ruby-testing-examples">View on GitHub</a>
+
+          <h1 id="project_title">Ruby-testing-examples</h1>
+          <h2 id="project_tagline">Examples of how to use RSpec and Cucumber for testing ruby</h2>
+
+            <section id="downloads">
+              <a class="zip_download_link" href="https://github.com/kkrull/ruby-testing-examples/zipball/master">Download this project as a .zip file</a>
+              <a class="tar_download_link" href="https://github.com/kkrull/ruby-testing-examples/tarball/master">Download this project as a tar.gz file</a>
+            </section>
+        </header>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <div id="main_content_wrap" class="outer">
+      <section id="main_content" class="inner">
+        <h1>
+<a name="ruby-testing-examples" class="anchor" href="#ruby-testing-examples"><span class="octicon octicon-link"></span></a>Ruby Testing Examples</h1>
+
+<p>A sandbox environment showing how to use different features in RSpec and Cucumber, as well as how to make the two work
+together.</p>
+
+<h2>
+<a name="rspec-features" class="anchor" href="#rspec-features"><span class="octicon octicon-link"></span></a>RSpec features</h2>
+
+<p>RSpec scenarios use a variety of helper modules to DRY up test code in each spec.</p>
+
+<ul>
+<li>Local to one spec file: <code>spec/has_internal_help_spec.rb</code>
+</li>
+<li>Global among all specs: <code>spec/includes_external_help_spec.rb</code>
+</li>
+<li>Universal between RSpec and Cucumber: <code>spec/includes_shared_help_spec.rb</code>
+</li>
+</ul><p>These work by calling <code>RSpec.configure#include</code> in <code>spec/spec_helper.rb</code> (which is automatically required in <code>.rspec</code>)
+for each module that you want to be available in all the specs.  Note that <code>.rspec</code> also adds <code>test/</code> to <code>$LOAD_PATH</code> so
+that specs can <code>require 'support/shared_module'</code>.</p>
+
+<p>Other ways of sharing code among specs have some negative consequences:</p>
+
+<ul>
+<li>If you open up a production class and add methods to it, those methods are around for good and are now available for
+(accidental) use in production code.  This happens even if your test-specific methods are in a file in <code>spec/</code>, due to
+the global way in which <code>require</code> works.</li>
+<li>
+<code>shared_context</code> works great for specs, but doesn't do much to help in Cucumber scenarios.</li>
+</ul><h2>
+<a name="cucumber-features" class="anchor" href="#cucumber-features"><span class="octicon octicon-link"></span></a>Cucumber features</h2>
+
+<p>Cucumber scenarios also use a variety of helper modules for the same reason as you do in RSpec - to DRY up the code.
+For example:</p>
+
+<ul>
+<li>Cucumber-specific helper modules: <code>features/support/cucumber_helper.rb</code>
+</li>
+<li>Universally shared modules between RSpec and Cucumber: <code>features/get_help.feature</code>
+</li>
+</ul><p>Cucumber includes modules into the base World object by calling <code>World( &lt;module&gt; )</code>.  In order to require a module, its
+path must be reachable from one of the entries in <code>$LOAD_PATH</code>.  <code>features/support/env.rb</code> does this by calling
+<code>Cucumber::LoadPath.add_dirs</code> with the shared helper directory (<code>test/</code>).</p>
+
+<h2>
+<a name="guard" class="anchor" href="#guard"><span class="octicon octicon-link"></span></a>Guard</h2>
+
+<p>Look at <code>Guardfile</code> to see the files that can trigger running RSpec tests and Cucumber scenarios.  Note the additional
+watch patterns for <code>test/support</code>, <code>.rspec</code> and <code>spec/spec_helper.rb</code>.</p>
+      </section>
+    </div>
+
+    <!-- FOOTER  -->
+    <div id="footer_wrap" class="outer">
+      <footer class="inner">
+        <p class="copyright">Ruby-testing-examples maintained by <a href="https://github.com/kkrull">kkrull</a></p>
+        <p>Published with <a href="http://pages.github.com">GitHub Pages</a></p>
+      </footer>
+    </div>
+
+    
+
+  </body>
+</html>
